@@ -1,15 +1,22 @@
+using EarthApi.Caches;
+using EarthApi.Filters;
+using EarthApi.Repositories;
+using EarthApi.Servicies;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionFilter>();
+});
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IPlayerService, PlayerService>();
+builder.Services.AddSingleton<OnlinePlayerCache>();
+builder.Services.AddSingleton<PlayerBalanceCache>();
+builder.Services.AddSingleton<IEarthRepository, EarthRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
