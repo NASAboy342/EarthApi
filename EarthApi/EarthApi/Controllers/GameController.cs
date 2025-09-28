@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EarthApi.Controllers
 {
     [ApiController]
+    [Route("game")]
     public class GameController: ControllerBase
     {
         private readonly GameInfoCache _gameInfoCache;

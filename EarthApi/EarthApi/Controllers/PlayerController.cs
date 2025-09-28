@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EarthApi.Controllers
 {
     [ApiController]
+    [Route("player")]
     public class PlayerController: ControllerBase
     {
         private readonly IPlayerService _playerService;
