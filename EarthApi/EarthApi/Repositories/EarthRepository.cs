@@ -1,9 +1,33 @@
-﻿using EarthApi.Models.Player;
+﻿using EarthApi.Models.Game;
+using EarthApi.Models.Player;
 
 namespace EarthApi.Repositories
 {
     public class EarthRepository : IEarthRepository
     {
+        public List<GameInfo> GetAllGames()
+        {
+            return new List<GameInfo>
+            {
+                new GameInfo()
+                {
+                    Id = 1,
+                    Name = "Bet And Run!",
+                    IsEnabled = true,
+                    IsUnderMaintenance = false,
+                    IconUrl = "",
+                },
+                new GameInfo()
+                {
+                    Id = 2,
+                    Name = "Drop The Ball",
+                    IsEnabled = true,
+                    IsUnderMaintenance = false,
+                    IconUrl = "",
+                }
+            };
+        }
+
         public PlayerBalance GetPlayerBalanceByUsername(string username)
         {
             return new PlayerBalance

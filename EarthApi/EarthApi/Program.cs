@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IPlayerService, PlayerService>();
 builder.Services.AddSingleton<OnlinePlayerCache>();
 builder.Services.AddSingleton<PlayerBalanceCache>();
+builder.Services.AddSingleton<GameInfoCache>();
 builder.Services.AddSingleton<IEarthRepository, EarthRepository>();
 
 var app = builder.Build();

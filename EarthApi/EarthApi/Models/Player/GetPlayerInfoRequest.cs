@@ -7,6 +7,8 @@ namespace EarthApi.Models.Player
 
         internal void ValidateRequest()
         {
+            if(string.IsNullOrWhiteSpace(Username))
+                throw new ArgumentException("Username is required");
         }
     }
 }
