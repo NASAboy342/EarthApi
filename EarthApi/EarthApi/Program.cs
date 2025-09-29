@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
+app.UseCors("AllowAllOrigins");
 //if (app.Environment.IsDevelopment())
 //{
     app.MapOpenApi();
