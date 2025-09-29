@@ -16,6 +16,18 @@ builder.Services.AddSingleton<PlayerBalanceCache>();
 builder.Services.AddSingleton<GameInfoCache>();
 builder.Services.AddSingleton<IEarthRepository, EarthRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithExposedHeaders();
+    });
+});
+
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())
