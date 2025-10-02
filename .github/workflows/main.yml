@@ -43,4 +43,4 @@ jobs:
         dotnet publish
         Write-Host "Publish completed successfully!"
         Write-Host "Ready to copy build to deployment directory..."
-        Copy-Item -Path "${{ env.publishDir }}/*" -Destination "${{ env.destinationDir }}" -Recurse
+        Copy-Item -Path "${{ env.publishDir }}/*" -Destination "${{ env.destinationDir }}" -Recurse -Force
