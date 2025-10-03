@@ -15,16 +15,18 @@ namespace EarthApi.Repositories
                     Name = "Bet And Run!",
                     IsEnabled = true,
                     IsUnderMaintenance = false,
-                    IconUrl = "",
-                },
-                new GameInfo()
-                {
-                    Id = 2,
-                    Name = "Drop The Ball",
-                    IsEnabled = true,
-                    IsUnderMaintenance = false,
-                    IconUrl = "",
+                    IconUrl = "https://apini.ppiinn.net/files/Earth_Games_Icons_/f17b89a4-36ae-4ec2-9e69-0f9665197c55.png",
+                    Route = "/bet-n-run2",
                 }
+                // new GameInfo()
+                // {
+                //     Id = 2,
+                //     Name = "Drop The Ball",
+                //     IsEnabled = true,
+                //     IsUnderMaintenance = false,
+                //     IconUrl = "",
+                //     Route = "/drop-the-ball",
+                // }
             };
         }
 
