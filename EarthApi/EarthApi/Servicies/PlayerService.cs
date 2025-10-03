@@ -31,5 +31,27 @@ namespace EarthApi.Servicies
             _onlinePlayerCache.Set(playerInfo);
             _playerBalanceCache.Set(playerBalance);
         }
+
+        public bool TryAddPlayerBalance(string username, decimal amount)
+        {
+            var playerBalance = _playerBalanceCache.GetByUserName(username);
+            if (playerBalance == null || playerBalance.Amount < amount)
+                return false;
+
+            playerBalance.Amount += amount;
+            _playerBalanceCache.Set(playerBalance);
+            return true;
+        }
+
+        public bool TryDeductPlayerBalance(string username, decimal amount)
+        {
+            var playerBalance = _playerBalanceCache.GetByUserName(username);
+            if (playerBalance == null || playerBalance.Amount < amount)
+                return false;
+
+            playerBalance.Amount -= amount;
+            _playerBalanceCache.Set(playerBalance);
+            return true;
+        }
     }
 }
