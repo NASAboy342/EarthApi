@@ -16,7 +16,7 @@ public class SettleRequest
         if (string.IsNullOrWhiteSpace(Username))
             throw new Exception("Username is required.");
 
-        if (Amount <= 0)
+        if (Amount < 0)
             throw new Exception("Amount must be greater than zero.");
 
         if (Stake < 0)
