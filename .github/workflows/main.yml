@@ -36,6 +36,9 @@ jobs:
     - name: Deploy Application
       shell: powershell
       run: |
+        Write-Host "Stopping application pool 'earthApi'..."
+        Stop-WebAppPool -Name "earthApi"
+        Write-Host "Application pool 'earthApi' stopped."
         Write-Host "Going to project directory..."
         cd "${{ env.projectDir }}"
         Write-Host "Current directory: $(Get-Location)"
@@ -44,3 +47,8 @@ jobs:
         Write-Host "Publish completed successfully!"
         Write-Host "Ready to copy build to deployment directory..."
         Copy-Item -Path "${{ env.publishDir }}/*" -Destination "${{ env.destinationDir }}" -Recurse -Force
+        Write-Host "Files copied successfully!"
+        Write-Host "Starting application pool 'earthApi'..."
+        Start-WebAppPool -Name "earthApi"
+        Write-Host "Application pool 'earthApi' started."
+        Write-Host "Deployment completed successfully!"
