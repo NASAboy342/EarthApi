@@ -98,6 +98,10 @@ public class BetAndRunService : IBetAndRunService
 
         gameSession.PreviousGameState = gameSession.GameState;
         gameSession.GameState = request.NextGameState;
+
+        var playerInfo = _onlinePlayerCache.GetByUserName(gameSession.Username);
+        playerInfo.GameSessionInJson = JsonConvert.SerializeObject(gameSession);
+        _onlinePlayerCache.Set(playerInfo);
     }
 
     public void GetBetResult(BetAndRunGameSession gameSession, GetBetResultRequest request)
