@@ -15,6 +15,7 @@ builder.Services.AddSingleton<OnlinePlayerCache>();
 builder.Services.AddSingleton<PlayerBalanceCache>();
 builder.Services.AddSingleton<GameInfoCache>();
 builder.Services.AddSingleton<IEarthRepository, EarthRepository>();
+builder.Services.AddSingleton<IBetAndRunService, BetAndRunService>();
 
 builder.Services.AddCors(options =>
 {

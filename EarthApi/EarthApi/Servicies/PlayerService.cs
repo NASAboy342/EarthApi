@@ -17,6 +17,26 @@ namespace EarthApi.Servicies
             _earthRepository=earthRepository;
         }
 
+        public DeductResponse Deduct(DeductRequest request)
+        {
+            request.ValidateRequest();
+            if (!IsPlayerOnlined(request.Username))
+                throw new Exception("Player is not online.");
+
+            var success = TryDeductPlayerBalance(request.Username, request.Amount);
+            if (!success)
+                throw new Exception("Failed to deduct player balance.");
+
+            var playerBalance = _playerBalanceCache.GetByUserName(request.Username);
+
+            var response = new DeductResponse
+            {
+                Balance = playerBalance.Amount,
+                Currency = playerBalance.Currency
+            };
+            return response;
+        }
+
         public bool IsPlayerOnlined(string username)
         {
             var playerInfo = _onlinePlayerCache.GetByUserName(username);
@@ -30,6 +50,26 @@ namespace EarthApi.Servicies
 
             _onlinePlayerCache.Set(playerInfo);
             _playerBalanceCache.Set(playerBalance);
+        }
+
+        public SettleResponse Settle(SettleRequest request)
+        {
+            request.ValidateRequest();
+            if (!IsPlayerOnlined(request.Username))
+                throw new Exception("Player is not online.");
+
+            var success = TryAddPlayerBalance(request.Username, request.Amount);
+            if (!success)
+                throw new Exception("Failed to add player balance.");
+
+            var playerBalance = _playerBalanceCache.GetByUserName(request.Username);
+
+            var response = new SettleResponse
+            {
+                Balance = playerBalance.Amount,
+                Currency = playerBalance.Currency
+            };
+            return response;
         }
 
         public bool TryAddPlayerBalance(string username, decimal amount)

@@ -42,41 +42,17 @@ namespace EarthApi.Controllers
         [HttpPost("deduct")]
         public EarthApiResponse<DeductResponse> Deduct([FromBody] DeductRequest request)
         {
-            request.ValidateRequest();
-            if (!_playerService.IsPlayerOnlined(request.Username))
-                throw new Exception("Player is not online.");
+            var response = _playerService.Deduct(request);
 
-            var success = _playerService.TryDeductPlayerBalance(request.Username, request.Amount);
-            if (!success)
-                throw new Exception("Failed to deduct player balance.");
-
-            var playerBalance = _playerBalanceCache.GetByUserName(request.Username);
-
-            return new EarthApiResponse<DeductResponse>(new DeductResponse
-            {
-                Balance = playerBalance.Amount,
-                Currency = playerBalance.Currency
-            });
+            return new EarthApiResponse<DeductResponse>(response);
         }
 
         [HttpPost("settle")]
         public EarthApiResponse<SettleResponse> Settle([FromBody] SettleRequest request)
         {
-            request.ValidateRequest();
-            if (!_playerService.IsPlayerOnlined(request.Username))
-                throw new Exception("Player is not online.");
+            var response = _playerService.Settle(request);
 
-            var success = _playerService.TryAddPlayerBalance(request.Username, request.Amount);
-            if (!success)
-                throw new Exception("Failed to add player balance.");
-
-            var playerBalance = _playerBalanceCache.GetByUserName(request.Username);
-
-            return new EarthApiResponse<SettleResponse>(new SettleResponse
-            {
-                Balance = playerBalance.Amount,
-                Currency = playerBalance.Currency
-            });
+            return new EarthApiResponse<SettleResponse>(response);
         }
 
         [HttpPost("sync-balance")]
