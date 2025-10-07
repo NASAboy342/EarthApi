@@ -8,5 +8,7 @@ namespace EarthApi.Servicies
         bool IsPlayerOnlined(string username);
         void LoginPlayer(string username);
         bool TryAddPlayerBalance(string username, decimal amount);
+        DeductResponse Deduct(DeductRequest request);
+        SettleResponse Settle(SettleRequest request);
     }
 }

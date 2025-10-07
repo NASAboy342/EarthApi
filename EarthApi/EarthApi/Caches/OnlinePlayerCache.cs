@@ -30,5 +30,23 @@ namespace EarthApi.Caches
             }
             return null!;
         }
+
+        public bool IsPlayerOnlined(string username, out Player? player)
+        {
+            var key = GetKey(username);
+            return TryGetValue(key, out player);
+        }
+
+        public void ExitGameSession(string username)
+        {
+            var player = GetByUserName(username);
+            if (TryGetValue(GetKey(username), out Player? playerInfo))
+            {
+                playerInfo.GameSessionInJson = null;
+                Set(playerInfo);
+                return;
+            }
+            throw new Exception("Player is not online.");
+        }
     }
 }

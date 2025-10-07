@@ -8,5 +8,6 @@
         public DateTime LastLogin { get; set; }
         public DateTime LastLogout { get; set; }
         public bool IsOnline { get; set; }
+        public string GameSessionInJson { get; set; }
     }
 }
