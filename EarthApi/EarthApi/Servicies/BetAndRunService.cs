@@ -180,8 +180,8 @@ public class BetAndRunService : IBetAndRunService
 
     public void SettleBet(BetAndRunGameSession gameSession, SettleBetRequest request)
     {
-        if (gameSession.GameState != EnumBetAndRunGameStatus.GameOver)
-            throw new Exception("Player is not in the correct game state to settle a bet. Expected state: GameOver");
+        if (gameSession.GameState != EnumBetAndRunGameStatus.GameOver && gameSession.GameState != EnumBetAndRunGameStatus.CashOut)
+            throw new Exception("Player is not in the correct game state to settle a bet. Expected state: GameOver or CashOut");
 
         var isOnReachableTile = gameSession.CurrentTile <= gameSession.ReachableTile;
 
