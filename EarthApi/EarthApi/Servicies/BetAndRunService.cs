@@ -194,6 +194,7 @@ public class BetAndRunService : IBetAndRunService
             Amount = settleAmount,
             Username = gameSession.Username,
             BetStatus = betStatus,
+            Stake = gameSession.Stake
         });
 
         gameSession.SettleTime = DateTime.UtcNow;

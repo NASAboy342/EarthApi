@@ -7,8 +7,8 @@ public class SettleRequest
 {
     public string Username { get; set; } = "";
     public decimal Amount { get; set; }
-
     public decimal Stake { get; set; }
+
     public EnumBetStatus BetStatus { get; set; }
 
     public void ValidateRequest()

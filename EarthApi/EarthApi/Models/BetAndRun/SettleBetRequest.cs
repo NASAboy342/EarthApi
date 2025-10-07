@@ -5,6 +5,7 @@ namespace EarthApi.Models.BetAndRun;
 public class SettleBetRequest
 {
     public string Username { get; set; } = "";
+
     internal void ValidateRequest()
     {
         if (string.IsNullOrEmpty(Username))
