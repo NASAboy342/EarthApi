@@ -213,10 +213,11 @@ public class BetAndRunService : IBetAndRunService
     private List<decimal> GetTileValue() {
         var tileValues = new List<decimal>
         {
-            _stakeMultiplyRate / 100
+            (decimal)_stakeMultiplyRate / 100m
         };
-        for(var i = 1; i < _tileCount; i++){
-            tileValues.Add((tileValues[i-1]*100 *2)/100); 
+        for (var i = 1; i < _tileCount; i++)
+        {
+            tileValues.Add((tileValues[i - 1] * 100 * 2) / 100);
         }
         return tileValues;
     }
