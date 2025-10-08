@@ -8,6 +8,7 @@ public enum EnumBetAndRunGameStatus
     Start,
     AwaitingBet,
     AwaitingRaiseBet,
+    RaisingBet,
     SettlingBet,
     BetSettledWin,
     BetSettledLose,

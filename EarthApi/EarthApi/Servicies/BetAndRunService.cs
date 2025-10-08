@@ -61,8 +61,8 @@ public class BetAndRunService : IBetAndRunService
 
     public void MovePlayerToNextTile(BetAndRunGameSession gameSession)
     {
-        if (gameSession.GameState != EnumBetAndRunGameStatus.AwaitingRaiseBet)
-            throw new Exception("Player is not in the correct game state to move to the next tile. Expected state: AwaitingRaiseBet");
+        if (gameSession.GameState != EnumBetAndRunGameStatus.RaisingBet)
+            throw new Exception("Player is not in the correct game state to move to the next tile. Expected state: RaisingBet");
 
         if (gameSession.CurrentTile >= _tileCount || gameSession.IsGameOver)
             throw new Exception("Game is already over.");
