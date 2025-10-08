@@ -2,6 +2,8 @@ using EarthApi.Caches;
 using EarthApi.Filters;
 using EarthApi.Repositories;
 using EarthApi.Servicies;
+using NLog;
+using NLog.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
