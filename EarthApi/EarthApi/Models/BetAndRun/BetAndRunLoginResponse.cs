@@ -9,4 +9,5 @@ public class BetAndRunLoginResponse : EarthApiResponseBase
     public int CurrentTile { get; set; }
     public EnumBetAndRunGameStatus PreviousGameState { get; set; }
     public EnumBetAndRunGameStatus GameState { get; set; }
+    public List<decimal> TileValues { get; set; } = new List<decimal>();
 }

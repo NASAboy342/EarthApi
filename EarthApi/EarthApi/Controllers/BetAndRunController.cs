@@ -37,6 +37,7 @@ public class BetAndRunController : ControllerBase
         {
             SessionId = gameSession.SessionId,
             CurrentTile = gameSession.CurrentTile,
+            TileValues = gameSession.TileValues,
             PreviousGameState = gameSession.PreviousGameState,
             GameState = gameSession.GameState,
             ErrorCode = EnumEarthApiErrorCode.Success,
@@ -224,5 +225,26 @@ public class BetAndRunController : ControllerBase
         };
 
         return new EarthApiResponse<SettleBetResponse>(response);
+    }
+
+    [HttpPost("get-tile-values")]
+    public EarthApiResponse<GetTileValuesResponse> GetTileValues([FromBody] GetTileValuesRequest request)
+    {
+        request.ValidateRequest();
+        if (!_onlinePlayerCache.IsPlayerOnlined(request.Username, out var playerInfo))
+            throw new Exception("Player is not online.");
+
+        var gameSession = _betAndRunService.GetCurrentGameSession(request.Username);
+        if (gameSession == null)
+            throw new Exception("No active game session found for the player.");
+
+        var response = new GetTileValuesResponse
+        {
+            TileValues = gameSession.TileValues,
+            ErrorCode = EnumEarthApiErrorCode.Success,
+            ExtraMessage = "Tile values fetched successfully"
+        };
+
+        return new EarthApiResponse<GetTileValuesResponse>(response);
     }
 }
