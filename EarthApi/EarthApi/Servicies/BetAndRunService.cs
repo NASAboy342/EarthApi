@@ -189,7 +189,7 @@ public class BetAndRunService : IBetAndRunService
 
         var isOnReachableTile = gameSession.CurrentTile <= gameSession.ReachableTile;
 
-        var settleAmount = isOnReachableTile ? gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile] : 0;
+        var settleAmount = isOnReachableTile ? gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1] : 0;
 
         var betStatus = settleAmount <= gameSession.Stake ? EnumBetStatus.Lose : EnumBetStatus.Win;
 
