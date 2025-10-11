@@ -153,6 +153,7 @@ public class BetAndRunController : ControllerBase
             PreviousGameState = updatedGameSession.PreviousGameState,
             GameState = updatedGameSession.GameState,
             Balance = playerBalance.Amount,
+            CashOutAmount = updatedGameSession.CashOutAmount,
             Currency = playerBalance.Currency,
             ErrorCode = EnumEarthApiErrorCode.Success,
             ExtraMessage = "Bet placed successfully"

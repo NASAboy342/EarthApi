@@ -87,6 +87,7 @@ public class BetAndRunService : IBetAndRunService
         });
 
         gameSession.Stake = request.Amount;
+        gameSession.CashOutAmount = GetCashOutAmount(gameSession);
 
         var playerInfo = _onlinePlayerCache.GetByUserName(gameSession.Username);
         playerInfo.GameSessionInJson = JsonConvert.SerializeObject(gameSession);
