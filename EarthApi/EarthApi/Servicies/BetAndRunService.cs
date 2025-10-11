@@ -20,11 +20,13 @@ public class BetAndRunService : IBetAndRunService
     private readonly int _winRate = 80;
     private readonly Random _random;
     private readonly int _gameId = 1;
+    private readonly ILoggerService _loggerService;
 
-    public BetAndRunService(OnlinePlayerCache onlinePlayerCache, IPlayerService playerService)
+    public BetAndRunService(OnlinePlayerCache onlinePlayerCache, IPlayerService playerService, ILoggerService loggerService)
     {
         _onlinePlayerCache = onlinePlayerCache;
         _playerService = playerService;
+        _loggerService = loggerService;
         _random = new Random();
     }
 
@@ -223,7 +225,18 @@ public class BetAndRunService : IBetAndRunService
 
     private decimal GetCashOutAmount(BetAndRunGameSession gameSession)
     {
-        var cashOutAmount = (gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1]) + gameSession.Stake;
+        var stakeMultiplier = 0m;
+        var targetTileIndex = gameSession.CurrentTile - 1;
+        if (targetTileIndex >= 0 && targetTileIndex < gameSession.TileValues.Count)
+        {
+            stakeMultiplier = gameSession.TileValues[targetTileIndex];
+        }
+        else
+        {
+            _loggerService.Error($"Invalid tile index: {targetTileIndex}");
+            stakeMultiplier = 0m;
+        }
+        var cashOutAmount = (gameSession.Stake * stakeMultiplier) + gameSession.Stake;
         return cashOutAmount;
     }
 
