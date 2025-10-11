@@ -115,8 +115,18 @@ public class BetAndRunService : IBetAndRunService
         }
         else
         {
+            UpdateCashOutAmount(gameSession);
             SetNextGameState(request.Username, EnumBetAndRunGameStatus.BetSettledWin);
         }
+    }
+
+    private void UpdateCashOutAmount(BetAndRunGameSession gameSession)
+    {
+        var cashOutAmount = GetCashOutAmount(gameSession);
+        gameSession.CashOutAmount = cashOutAmount;
+        var playerInfo = _onlinePlayerCache.GetByUserName(gameSession.Username);
+        playerInfo.GameSessionInJson = JsonConvert.SerializeObject(gameSession);
+        _onlinePlayerCache.Set(playerInfo);
     }
 
     private void SetNextGameState(string username, EnumBetAndRunGameStatus newGameStatus)
@@ -189,7 +199,7 @@ public class BetAndRunService : IBetAndRunService
 
         var isOnReachableTile = gameSession.CurrentTile <= gameSession.ReachableTile;
 
-        var settleAmount = isOnReachableTile ? gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1] : 0;
+        var settleAmount = isOnReachableTile ? GetCashOutAmount(gameSession) : 0;
 
         var betStatus = settleAmount <= gameSession.Stake ? EnumBetStatus.Lose : EnumBetStatus.Win;
 
@@ -210,6 +220,13 @@ public class BetAndRunService : IBetAndRunService
         playerInfo.GameSessionInJson = JsonConvert.SerializeObject(gameSession);
         _onlinePlayerCache.Set(playerInfo);
     }
+
+    private decimal GetCashOutAmount(BetAndRunGameSession gameSession)
+    {
+        var cashOutAmount = gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1];
+        return cashOutAmount;
+    }
+
     private List<decimal> GetTileValue() {
         var tileValues = new List<decimal>
         {

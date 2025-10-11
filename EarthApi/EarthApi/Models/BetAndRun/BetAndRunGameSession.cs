@@ -20,4 +20,5 @@ public class BetAndRunGameSession
     public DateTime SettleTime { get; set; }
     public decimal SettledAmount { get; set; }
     public EnumBetStatus BetStatus { get; set; }
+    public decimal CashOutAmount { get; set; }
 }

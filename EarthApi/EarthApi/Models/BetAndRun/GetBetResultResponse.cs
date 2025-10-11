@@ -5,8 +5,9 @@ namespace EarthApi.Models.BetAndRun;
 
 public class GetBetResultResponse : EarthApiResponseBase
 {
-    public int CurrentTile { get; internal set; }
-    public bool IsGameOver { get; internal set; }
-    public EnumBetAndRunGameStatus PreviousGameState { get; internal set; }
-    public EnumBetAndRunGameStatus GameState { get; internal set; }
+    public int CurrentTile { get; set; }
+    public bool IsGameOver { get; set; }
+    public EnumBetAndRunGameStatus PreviousGameState { get; set; }
+    public EnumBetAndRunGameStatus GameState { get; set; }
+    public decimal CashOutAmount { get; set; }
 }

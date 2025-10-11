@@ -186,6 +186,7 @@ public class BetAndRunController : ControllerBase
             IsGameOver = updatedGameSession.IsGameOver,
             PreviousGameState = updatedGameSession.PreviousGameState,
             GameState = updatedGameSession.GameState,
+            CashOutAmount = updatedGameSession.CashOutAmount,
             ErrorCode = EnumEarthApiErrorCode.Success,
             ExtraMessage = "Bet settled successfully"
         };
