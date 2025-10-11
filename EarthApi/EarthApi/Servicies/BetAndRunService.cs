@@ -223,7 +223,7 @@ public class BetAndRunService : IBetAndRunService
 
     private decimal GetCashOutAmount(BetAndRunGameSession gameSession)
     {
-        var cashOutAmount = gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1];
+        var cashOutAmount = (gameSession.Stake * gameSession.TileValues[gameSession.CurrentTile - 1]) + gameSession.Stake;
         return cashOutAmount;
     }
 
