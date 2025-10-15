@@ -240,7 +240,7 @@ public class BetAndRunService : IBetAndRunService
             _loggerService.Error($"Invalid tile index: {targetTileIndex}");
             stakeMultiplier = 0m;
         }
-        var cashOutAmount = (gameSession.Stake * stakeMultiplier);
+        var cashOutAmount = (gameSession.Stake * stakeMultiplier) + gameSession.Stake;
         return cashOutAmount;
     }
 
