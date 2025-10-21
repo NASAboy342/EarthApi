@@ -15,7 +15,7 @@ namespace EarthApi.Repositories
                     Name = "Bet And Run!",
                     IsEnabled = true,
                     IsUnderMaintenance = false,
-                    IconUrl = "https://apini.ppiinn.net/files/Earth_Games_Icons_/f17b89a4-36ae-4ec2-9e69-0f9665197c55.png",
+                    IconUrl = "https://pincloud.ppiinn.net/files/Earth_Games_Icons_/f17b89a4-36ae-4ec2-9e69-0f9665197c55.png",
                     Route = "/bet-n-run2",
                     Description = "Step into the barnyard and test your luck with BetAndRun fast-paced multiplier game where every step holds a chance to multiply your winnings!"
                 }
